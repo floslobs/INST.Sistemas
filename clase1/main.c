@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 	//estas son variables
 	int edad =0;
 	char nombre[20]="";
-	double altura = 0;
+	double altura = 0, porc=0;
 	
 	printf("Ingrese su edad:\n");
 	scanf("%d",&edad);
@@ -20,7 +20,8 @@ int main(int argc, char *argv[])
 	
 	printf("Mi nombre es %s, mi edad es %d, mi altura es %lf",nombre,edad,altura);
 
-	
+	porc=(edad*100);
+	printf("%d",porc);
 	
 	return 0;
 }
