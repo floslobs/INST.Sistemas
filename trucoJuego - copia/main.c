@@ -6,7 +6,7 @@
 
 int main(int argc, char *argv[]) {
 	
-
+	printf("hola mundo");
 	int valorCart[40] =	{1, 1, 7, 7, 3,3,3,3,2,2,2,2,1,1,12,12,12,12,11,11,11,11,10,10,10,10,7,7,6,6,6,6,5,5,5,5,4,4,4,4} ;
 		// defino cuantas cartas y que valores tienen
 		
@@ -18,18 +18,18 @@ int main(int argc, char *argv[]) {
 	
 	
 	
-//		 printf("Los palos de la baraja son:\n");
-  //  for (int i = 0; i < 4; i++) {
-  //      printf("%s\n", paloCart[i]);
- //   }
- //   for (int i = 0; i < 40; i++) {
+		 printf("Los palos de la baraja son:\n");
+    for (int i = 0; i < 4; i++) {
+        printf("%s\n", paloCart[i]);
+    }
+    for (int i = 0; i < 40; i++) {
     	
- //       printf("%d\n", valorCart[i]);
-  //  }
+        printf("%d\n", valorCart[i]);
+    }
 	mostrarMenu();
 	verReglas();
 	iniciarJuego();
-	mostrarCarta(valorCart, paloCart);
+
     
 	return 0;
 }
@@ -37,7 +37,6 @@ int main(int argc, char *argv[]) {
 // Función para mostrar el menu principal
 void mostrarMenu() {
     int opc; 
-    int opc2;
     do {
         // Mostrar las opciones del menu
         printf("     TRUCO\n");
@@ -55,7 +54,6 @@ void mostrarMenu() {
                 break;
             case 2: 
                 iniciarJuego(); //funcion que inicia el juego
-                
                 break;
             case 3: 
                 printf("Saliendo del juego...\n"); 
@@ -72,51 +70,25 @@ void mostrarMenu() {
 // Función para iniciar el juego
 void iniciarJuego() {
     int puntos; 
-    int opc2;
-    printf("A cuantos puntos queres jugar a 15 o 30 ? ");
+    printf("¿A cuantos puntos queres jugar a 15 o 30 ? ");
     scanf("%d", &puntos);//cantidad de puntos 
-	switch(puntos){
+
+/*	switch(puntos){
 		case 15:
-          		mostrarCarta(1,"Copa  ");
-				
+			
 			break;
-		case 30:
-               	mostrarCarta(5,"Copa  ");
-                
+		case 30;
+			
 			break;
-		default:
-			printf("jsak");
-	}  
-}
-
-void mostrarCarta(int nume, char palo[]){
-//SE DIBUJA LA CARTA
-	int eleccion=0;
-	for(int i=0; i<3; i++){
-		
-	
-	printf("Carta%d\n",i+1);
-	printf(" +-------+\n");
-	printf(" |%d      |\n",nume);
-	printf(" |       |\n");
-	printf(" |%s |\n",palo);
-	printf(" |       |\n");
-	printf(" |      %d|\n",nume);
-	printf(" +-------+\n");
-	
-	}
-	printf("Elije que hacer\n");
-	printf("4-ENVIDO---5-TRUCO---6-MAZO\n");
-	printf("TIRAR CARTA-- 1, 2 o 3\n");
-	scanf("%d",&eleccion);
-
-}
+		default:*/
+}    
 
 void mezclarCart(){
 	
 	
 	
 }
+
 void darMano(){
 }
 
