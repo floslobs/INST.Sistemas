@@ -90,7 +90,7 @@ return pmulti;
 	}*/
 int numeroParRetorno(int pnum){
 	
-	resto=0;
+	int resto=0;
 	if((pnum % 2==0)){
 		printf("el numero %d es par\n",pnum);
 	}else{
@@ -112,7 +112,7 @@ double promRetorno(int psuma, double promedio){
 
 int ingreseNum(int pnum){
 	
-	printf("ingrese el primer numero\n");
+	printf("ingrese un numero\n");
 	scanf("%d",&pnum);
 	return pnum;
 }
@@ -141,9 +141,9 @@ double prom=0;
 	suma= sumaNumerosconParametrosyRetorno(num1,num2,suma);
 	multi=multiplicacionRetorno(num1,num2,multi);
 	
-	printf("fuera de la funcion la resta es: %d\n",resta);
-	printf("fuera de la funcion la suma es: %d\n",suma);
-	printf("fuera de la funcion la multiplicacion es: %d\n",multi);
+	printf("La resta es: %d\n",resta);
+	printf("La suma es: %d\n",suma);
+	printf("La multiplicacion es: %d\n",multi);
 	divisionRetorno(num1,num2,division);
 	prom=promRetorno(suma,prom);
 return 0;

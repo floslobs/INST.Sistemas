@@ -67,11 +67,11 @@ return pcont;
 }
 
 //vector ordenado de menor a mayor
-void orden(int pArray[], int aux, int n){
+void orden(int pArray[],int n  ){
 	
-	aux=0;
-	for(int i = 0; i < n -1 ; i++) {
-        for(int j = 1; j < n -1 ; j++) {
+	int aux=0;
+	for(int i = 1; i < n -1 ; i++) {//i en 1 para ordenar
+        for(int j = 0; j < n -1 ; j++) {
             if(pArray[j] > pArray[j + 1]) {
                 aux = pArray[j];
                 pArray[j] = pArray[j + 1];
@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
 	mayor(array2,4);
 	menor(array2,4);
 	cuentaPares(array2,4);
-	orden(array2, n);
+	orden(array2,4);
 	
 	return 0;
 	}
