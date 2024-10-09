@@ -232,12 +232,12 @@ int main(int argc, char *argv[]) {
 char palos[40][10]; // Arreglo para almacenar el nombre de los palos
 char palo1, palo2;
 
-    
+    srand(getpid());
 	
 	mostrarMenu();
 	verReglas();
 	iniciarJuego();
-	generarMazo(valores, palos);
+	generarMazo(valor, palo)= rand(valor, palo) % 3;
 
 	int manoJug1[3];
 	int manoJug2[3];
