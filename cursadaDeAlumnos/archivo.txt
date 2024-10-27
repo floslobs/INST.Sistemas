@@ -1,0 +1,12 @@
+Nombre y Apellido: flor lob
+Nivel: 1
+Materia: Algoritmo y estructura de datos
+DESAPROBO LA CURSADA.
+Promedio de asistencias: 35.16%
+Promedio de parciales: 8
+Nombre y Apellido: frfr fr
+Nivel: 3
+Materia: Aspectos legales de la Profesion
+DESAPROBO LA CURSADA.
+Promedio de asistencias: 35.94%
+Promedio de parciales: 6

@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+/* IMPRIMIR MATRIZ . con numeros aleatoris, ingresar cantidad de columnas y de filas. 
+imprimir diagonal principal, triangulo inferior , triangulo superior. 
+contar cuantos numeros para hay. */
 
 int main(int argc, char *argv[])
 {
@@ -11,6 +13,7 @@ int main(int argc, char *argv[])
 	int cont=0;
 	int cantF=0, cantC=0;
 	srand(getpid());
+	
 	
 	printf("Ingrese cantidad de columnas\n");
 	scanf("%d",&cantC);
@@ -37,6 +40,14 @@ int main(int argc, char *argv[])
 		printf("\n");
 	}
 	
+		//imprimir matriz de atras adelante
+	printf("Matriz\n\n");
+	for(int fila=cantF-1; fila>=0; fila--){
+		for(int colum=cantC-1; colum>=0; colum--){
+			printf("|%d|",matriz[fila][colum]);
+		}
+		printf("\n");
+	}
 	//imprimir diagonal principal
 	printf("\nDiagonal\n\n");
 	for(int fila=0; fila<cantF; fila++){
@@ -72,5 +83,7 @@ int main(int argc, char *argv[])
 	
 
 	printf("\n\nHay %d numero pares",cont);
+	
+	
 	return 0;
 }
