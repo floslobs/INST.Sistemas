@@ -7,8 +7,66 @@ cada parcial. debera imprimir apellido, nombre del alumno, porcentaje de asisten
 la cursada
 (tener en cuenta cuales se promocionan). y finalmente si aprobo la cursada o no, su promedio (de las dos notas
  de parciales)*/
+void asistidos();
+void eleccion();
+void materias();	
+int main(int argc, char** argv) 
+{
+	char nombreCompleto[50]="";
+	char apellido[20]="";
+	int opc=0;
+	int opc1=0;
+	int promAsis=0, asis=0, aus=0;
+	int mate=0;
+	int prom=0;
 
-//funcion cargar datos
+	// Apertura del archivo en modo escritura para guardar los datos
+	FILE *archivo = fopen("archivo.txt", "w");
+		if (archivo == NULL)
+		{
+        	printf("No se pudo abrir el archivo.\n");
+        	return 1;	
+		}
+	do{
+		printf("0-Cargar, 1-Salir.\n");
+		scanf("%d",&opc);
+       getchar(); // Para capturar el salto de línea que queda en el buffer después del scanf
+
+		if(opc==0){
+			// Ingreso de nombre y apellido del alumno
+			printf("Ingrese nombre completo del alumno\n");
+			fgets(nombreCompleto, sizeof(nombreCompleto), stdin);
+			
+			printf("Ingrese apellido del alumno:\n");
+            fgets(apellido, sizeof(apellido), stdin);
+			// Guardar en archivo
+			fprintf(archivo, "Nombre completo: %s Apellido:  %s", nombreCompleto, apellido);
+           
+		    // Selección del nivel (1ro, 2do o 3ro)
+			do {
+					printf("En que nivel se encuentra el alumno 1ro, 2do o 3ro (ingrese 1, 2 o 3)? ");
+					scanf("%d", &opc1);
+
+					if(opc1 != 1 && opc1 != 2 && opc1 != 3) {//validar las opciones 1,2 o 3
+					printf("Opcion invalida. Por favor ingrese 1, 2 o 3.\n");
+					}
+
+				} while (opc1 != 1 && opc1 != 2 && opc1 != 3);
+                fprintf(archivo, "Nivel: %d\n", opc1);
+            	// Selección del nivel (1ro, 2do o 3ro)                
+				materias(opc1, archivo, &asis, &prom, &mate);
+				asistidos(archivo, asis, mate, prom, opc1, nombreCompleto, apellido);
+	
+				fprintf(archivo, "-------------------------------------------\n");
+		} else if (opc != 1) {
+            printf("Opcion invalida. Vuelva a elegir.\n");
+		}	
+	}while(opc != 1);
+	    // Cierre del archivo
+		fclose(archivo);
+	return 0;
+}
+//funcion materias de los 3 cursos
 void materias(int op, FILE *archivo,int *asis, int *prom, int *mate){
 	int matess=0;
 
@@ -27,13 +85,13 @@ void materias(int op, FILE *archivo,int *asis, int *prom, int *mate){
 				printf("8-Sistemas y organizaciones\n");
 				scanf("%d",&matess);	
 					
-				if(matess < 1 || matess > 8 ){
+				if(matess < 1 || matess > 8 ){//validando rango de materias
 						printf("\nOPCION IVALIDA\n");
 				}
 				
 			}while(matess < 1 || matess > 8);
 			
-			*mate=matess;
+			*mate=matess;// Asigna el valor de matess a la direccion de memoria apuntada por mate
 			
 		break;
 		case 2:
@@ -50,7 +108,7 @@ void materias(int op, FILE *archivo,int *asis, int *prom, int *mate){
 				printf("8-Practicas Profesionalizantes 2\n");
 				scanf("%d",&matess);
 				
-				if (matess < 1 || matess > 8) {
+				if (matess < 1 || matess > 8) {//validando rango de materias
                     printf("\nOPCION INVALIDA\n");
                 }
             } while (matess < 1 || matess > 8);
@@ -69,7 +127,7 @@ void materias(int op, FILE *archivo,int *asis, int *prom, int *mate){
 				printf("7-Seminario de actualizacion\n");
 				scanf("%d",&matess);
 				
-				 if (matess < 1 || matess > 8) {
+				 if (matess < 1 || matess > 8) {//validando rango de materias
                     printf("\nOPCION INVALIDA\n");
                 }
             } while (matess < 1 || matess > 8);
@@ -113,14 +171,14 @@ void materias(int op, FILE *archivo,int *asis, int *prom, int *mate){
         }
         break;
     default:
-        fprintf(archivo, "Materia no válida\n");
+        fprintf(archivo, "Materia no valida\n");
         break;
 	}
 	eleccion(asis, prom);          
             
 }
 
-//funcion eleccion
+//funcion eleccion de datos
 void eleccion(int *asis, int *prom){
 	
 	int tp=0;
@@ -128,16 +186,17 @@ void eleccion(int *asis, int *prom){
 	int suma=0;
 	int aus=0;
 
-	
+			//tomamos datos
 			printf("Ingrese cantidad de presentes: ");
 			scanf("%d",asis);
 			
-			printf("Cantidad de ausentes:  ");
+			printf("Cantidad de ausentes: ");
 			scanf("%d",&aus);
 			
 			printf("Cantidad de trabajos practicos\n");
 			scanf("%d",&tp);
 			
+			// Registrar las notas de los trabajos practicos (TP)
 			for(int i=0; i<tp; i++){
 				do{	
 					printf("Nota del tp nro %d\n",i+1);
@@ -151,7 +210,7 @@ void eleccion(int *asis, int *prom){
 			
 			printf("Cantidad de parciales.  ");
 			scanf("%d",&cantParc);
-			
+				//cargamos notas de los parciales
 				for(int i=0; i<cantParc; i++){
 					do{
 						printf("Nota del parcial nro %d\n",i+1);
@@ -179,12 +238,15 @@ void asistidos(FILE *archivo, int asis, int mate, int prom, int opc1, char *nom,
 	int totalClases=64;
 	
 	printf("Nombre y Apellido: %s %s\n",nom, ape);
-
+	// Verificamos las condiciones para determinar el total de clases
 	 if ((mate == 2 && opc1 == 1) || (mate == 1 && opc1 == 2) || (mate == 8 && opc1 == 2)){
-        totalClases = 128;
+    // Si se cumple alguna de las condiciones anteriores, asignamos 128 a totalClases
+	    totalClases = 128;
     } else if (mate == 1 && opc1 == 3) {
+    	    // Si la materia es 1 y la opcion es 3, tambien asignamos 128 a totalClases
         totalClases = 128;
     } else if (mate == 5 && opc1 == 3) {
+    	 // Si la materia es 5 y la opción es 3, asignamos 192 a totalClases
         totalClases = 192;
     }
     
@@ -193,8 +255,8 @@ void asistidos(FILE *archivo, int asis, int mate, int prom, int opc1, char *nom,
      printf("Promedio de asistencias: %.2lf%%\n", promAsis);
     printf("Promedio de parciales: %d\n", prom);
     
-    // Verificar condiciones de aprobación
-    if (promAsis >= 60 && prom >= 4) {  // Condiciones mínimas para aprobar
+    // Verificar condiciones de aprobacion
+    if (promAsis >= 60 && prom >= 4) {  // Condiciones minimas para aprobar
         // Materias que no se promocionan
         if ((opc1 == 1 && (mate == 1 || mate == 3 || mate == 4 || mate == 8)) ||
             (opc1 == 2 && (mate >= 1 && mate <= 8)) ||
@@ -228,54 +290,4 @@ void asistidos(FILE *archivo, int asis, int mate, int prom, int opc1, char *nom,
 
 
 
-int main(int argc, char** argv) 
-{
-	char nombre[20]="";
-	char apellido[20]="";
-	int opc=0;
-	int opc1=0;
-	int promAsis=0, asis=0, aus=0;
-	int mate=0;
-	int prom=0;
 
-
-	FILE *archivo = fopen("archivo.txt", "w");
-		if (archivo == NULL)
-		{
-        	printf("No se pudo abrir el archivo.\n");
-        	return 1;	
-		}
-	do{
-		printf("0-Cargar, 1-Salir.\n");
-		scanf("%d",&opc);
-				
-		if(opc==0){
-		
-			printf("Ingrese nombre Y apellido del alumno\n");
-			scanf("%s",nombre);
-			scanf("%s",apellido);
-			fprintf(archivo, "Nombre y Apellido: %s %s\n", nombre, apellido);
-
-			do {
-					printf("En que nivel se encuentra el alumno 1ro, 2do o 3ro (ingrese 1, 2 o 3)? ");
-					scanf("%d", &opc1);
-
-					if(opc1 != 1 && opc1 != 2 && opc1 != 3) {
-					printf("Opcion invalida. Por favor ingrese 1, 2 o 3.\n");
-					}
-
-				} while (opc1 != 1 && opc1 != 2 && opc1 != 3);
-                fprintf(archivo, "Nivel: %d\n", opc1);
-                
-				materias(opc1, archivo, &asis, &prom, &mate);
-				asistidos(archivo, asis, mate, prom, opc1, nombre, apellido);
-	
-				fprintf(archivo, "-------------------------------------------\n");
-		} else if (opc != 1) {
-            printf("Opcion invalida. Vuelva a elegir.\n");
-		}	
-	}while(opc != 1);
-	
-		fclose(archivo);
-	return 0;
-}
